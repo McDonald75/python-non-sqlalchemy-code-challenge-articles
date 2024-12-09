@@ -69,6 +69,12 @@ class Magazine:
         titles = [article.title for article in Article.all if article.magazine == self]
         if(len(titles)>0):
             return titles
+    def contributing_authors(self):
+        authors = [article.author for article in self.all_articles]
+        list =  [author for author in authors if authors.count(author)> 2]
+        if(len(list)> 0):
+            return list
+        return None
     @classmethod
     def top_publisher(self):
         if(len(Magazine.all) == 0):
