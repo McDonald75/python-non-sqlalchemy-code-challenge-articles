@@ -88,8 +88,54 @@ class Magazine:
             return None
         return max(cls._instances, key=lambda mag: len(mag._articles), default=None)
 
+class Article:
+    all = []
+
+    def __init__(self, author, magazine, title):
+        if not isinstance(author, Author):
+            raise ValueError("author must be an instance of Author")
+        if not isinstance(magazine, Magazine):
+            raise ValueError("magazine must be an instance of Magazine")
+        if not isinstance(title, str):
+            raise ValueError("title must be a string")
+        if not (5 <= len(title) <= 50):
+            raise ValueError("title must be between 5 and 50 characters inclusive")
+        
+        self._author = author
+        self._magazine = magazine
+        self._title = title
+        Article.all.append(self)
+
+    @property
+    def author(self):
+        return self._author
+
+    @author.setter
+    def author(self, value):
+        if not isinstance(value, Author):
+            raise ValueError("author must be an instance of Author")
+        self._author = value
+
+    @property
+    def magazine(self):
+        return self._magazine
+
+    @magazine.setter
+    def magazine(self, value):
+        if not isinstance(value, Magazine):
+            raise ValueError("magazine must be an instance of Magazine")
+        self._magazine = value
+
+    @property
+    def title(self):
+        return self._title
+
+    @title.setter
+    def title(self, value):
+        raise AttributeError("title is immutable")
 
 class Article:
+    all =[]
     def __init__(self, author, magazine, title):
         if not isinstance(author, Author):
             raise Exception("Author must be of type Author")
@@ -104,6 +150,7 @@ class Article:
         self._title = title
         author.articles().append(self)
         magazine.articles().append(self)
+        self.all.append(self)
 
     @property
     def author(self):
@@ -125,9 +172,19 @@ class Article:
     @title.setter
     def title(self):
         raise Exception('cant set title')
-    
-author = Author("Carry Bradshaw")
-magazine = Magazine("Vogue", "Fashion")
-article_1 = Article(author, magazine, "How to wear a tutu with style")
-article_1.title = 500
+# Article.all = []
+# author = Author("Carry Bradshaw")
+# magazine_1 = Magazine("Vogue", "Fashion")
+# magazine_2 = Magazine("AD", "Architecture & Design")
+# article_1 = Article(author, magazine_1, "How to wear a tutu with style")
+# article_2 = Article(author, magazine_2, "Dating life in NYC")
+# print(len(Article.all))
 
+author_1 = Author("Carry Bradshaw")
+author_2 = Author("Nathaniel Hawthorne")
+magazine = Magazine("Vogue", "Fashion")
+article_1 = Article(author_1, magazine, "How to wear a tutu with style")
+article_2 = Article(author_1, magazine, "Dating life in NYC")
+article_3 = Article(author_2, magazine, "How to be single and happy")
+
+print(author_2.articles())
