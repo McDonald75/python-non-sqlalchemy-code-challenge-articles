@@ -2,9 +2,9 @@ from collections import Counter
 class Article:
     all = []
     def __init__(self, author, magazine, title):
-        self._title = title
-        self._author = author
-        self._magazine = magazine
+        self.title = title
+        self.author = author
+        self.magazine = magazine
         Article.all.append(self)
         if not author in magazine.authors:
             magazine.authors.append(author)
@@ -53,6 +53,14 @@ class Magazine:
         if(not isinstance(name, str)) or not (len(name)>1 and len(name)<17 ):
             raise Exception("Magazine name invalide")
         self._name = name
+    @property
+    def category(self):
+        return self._category
+    @category.setter
+    def category(self, category):
+        if(not isinstance(category, str)) or (len(category)<1):
+            raise Exception("category name invalide")
+        self._category = category
     def articles(self):
         return self.all_articles
     def contributors(self):
@@ -78,7 +86,7 @@ class Magazine:
 
 class Author:
     def __init__(self, name):
-        self._name = name
+        self.name = name
     @property
     def name(self):
         return self._name
@@ -86,6 +94,7 @@ class Author:
     def name(self, name):
         if(not isinstance(name, str)) or (len(name)<1):
             raise Exception("Author name must be string and greater than 0")
+        self._name = name
     def articles(self):
         return [article for article in Article.all if article.author == self]
     def magazines(self):
