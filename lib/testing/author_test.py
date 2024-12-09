@@ -53,21 +53,21 @@ class TestAuthor:
         # with pytest.raises(Exception):
         #     Author("")
 
-    # def test_has_many_articles(self):
-    #     """author has many articles"""
-    #     author_1 = Author("Carry Bradshaw")
-    #     author_2 = Author("Nathaniel Hawthorne")
-    #     magazine = Magazine("Vogue", "Fashion")
-    #     article_1 = Article(author_1, magazine, "How to wear a tutu with style")
-    #     article_2 = Article(author_1, magazine, "Dating life in NYC")
-    #     article_3 = Article(author_2, magazine, "How to be single and happy")
+    def test_has_many_articles(self):
+        """author has many articles"""
+        author_1 = Author("Carry Bradshaw")
+        author_2 = Author("Nathaniel Hawthorne")
+        magazine = Magazine("Vogue", "Fashion")
+        article_1 = Article(author_1, magazine, "How to wear a tutu with style")
+        article_2 = Article(author_1, magazine, "Dating life in NYC")
+        article_3 = Article(author_2, magazine, "How to be single and happy")
 
-    #     assert len(author_1.articles()) == 2
-    #     assert len(author_2.articles()) == 1
-    #     assert article_1 in author_1.articles()
-    #     assert article_2 in author_1.articles()
-    #     assert article_3 not in author_1.articles()
-    #     assert article_3 in author_2.articles()
+        assert len(author_1.articles()) == 2
+        assert len(author_2.articles()) == 1
+        assert article_1 in author_1.articles()
+        assert article_2 in author_1.articles()
+        assert article_3 not in author_1.articles()
+        assert article_3 in author_2.articles()
 
     def test_articles_of_type_articles(self):
         """author articles are of type Article"""
